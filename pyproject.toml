@@ -1,0 +1,37 @@
+[project]
+name = "sarashina-ocr-demo"
+version = "0.1.0"
+description = "Sarashina2.2-OCR 性能確認デモ"
+requires-python = ">=3.10, <3.13"
+dependencies = [
+    "transformers==4.57.1",
+    "numpy<2.0",
+    "torch>=2.1.0, <2.3.0",
+    "torchvision>=0.16.0, <0.18.0",
+    "pillow",
+    "protobuf",
+    "sentencepiece",
+    "accelerate",
+    "gradio>=4.0.0",
+]
+
+[tool.uv]
+required-environments = ["sys_platform == 'darwin' and platform_machine == 'x86_64'"]
+
+# ----- 環境別セットアップ -----
+#
+# ■ Mac (Apple Silicon / Intel)
+#   → 追加作業なし。uv sync のみで OK
+#   → Apple Silicon は MPS (Metal GPU) が自動で使われます
+#
+# ■ Linux / Windows + CUDA 12.1 の場合:
+#   下記コメントを解除して uv sync を再実行
+#
+# [tool.uv.sources]
+# torch = { index = "pytorch-cu121" }
+# torchvision = { index = "pytorch-cu121" }
+#
+# [[tool.uv.index]]
+# name = "pytorch-cu121"
+# url = "https://download.pytorch.org/whl/cu121"
+# explicit = true
